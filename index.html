@@ -2,126 +2,199 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graduation Release - v1.0.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TLU Graduation Release - v3.3.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
-            background-color: #0d1117;
             color: #c9d1d9;
             font-family: 'Fira Code', monospace;
-            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-        }
-        .terminal {
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 650px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
             overflow: hidden;
+            position: relative;
         }
+
+        .bg-animated {
+            position: fixed;
+            top: -2%; left: -2%; width: 104vw; height: 104vh;
+            background: url('bg-school.jpg') center top/cover no-repeat;
+            animation: kenBurns 15s infinite alternate ease-in-out;
+            z-index: -2;
+        }
+        @keyframes kenBurns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.03); } 
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(135deg, rgba(13, 17, 23, 0.3), rgba(22, 27, 34, 0.6));
+            backdrop-filter: blur(2px); 
+            z-index: -1;
+        }
+
+        .terminal {
+            background-color: rgba(13, 17, 23, 0.85); 
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-radius: 12px;
+            width: 95%; 
+            max-width: 700px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 20px rgba(88, 166, 255, 0.1);
+            animation: slideUpFade 1s ease-out forwards, floatTerminal 6s ease-in-out infinite;
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh; 
+        }
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes floatTerminal {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
         .terminal-header {
-            background-color: #21262d;
-            padding: 10px 15px;
+            background-color: rgba(33, 38, 45, 0.9);
+            padding: 12px 15px;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid #30363d;
+            border-bottom: 1px solid rgba(88, 166, 255, 0.2);
+            border-radius: 12px 12px 0 0;
+            flex-shrink: 0;
         }
-        .buttons {
-            display: flex;
-            gap: 8px;
-        }
-        .circle {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
+        .buttons { display: flex; gap: 8px; }
+        .circle { width: 12px; height: 12px; border-radius: 50%; }
         .red { background-color: #ff5f56; }
         .yellow { background-color: #ffbd2e; }
         .green { background-color: #27c93f; }
-        .title {
-            margin-left: 15px;
-            font-size: 13px;
-            color: #8b949e;
-        }
+        .title { margin-left: 15px; font-size: 13px; color: #8b949e; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        
         .terminal-body {
             padding: 25px;
             line-height: 1.6;
-            min-height: 380px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            overflow-y: auto;
+            flex-grow: 1;
         }
-        .prompt { color: #58a6ff; }
-        .command { color: #7ee787; }
+        .prompt { color: #58a6ff; font-weight: bold; }
         
-        h1 {
-            color: #58a6ff;
-            font-size: 20px;
-            margin-bottom: 15px;
+        .typing-command {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #7ee787;
+            animation: typing 2.5s steps(40, end), blink-caret 0.75s step-end infinite;
+            color: #7ee787;
+            vertical-align: bottom;
+            max-width: 100%;
         }
-        .highlight { color: #f0883e; }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { 50% { border-color: transparent; } }
+
+        h1 { color: #58a6ff; font-size: 18px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
         .box {
-            border: 1px dashed #30363d;
+            border: 1px dashed rgba(88, 166, 255, 0.4);
             padding: 15px;
-            border-radius: 6px;
+            border-radius: 8px;
             margin: 15px 0;
-            background-color: #0d1117;
-            font-size: 14px;
+            background-color: rgba(0, 0, 0, 0.3);
+            font-size: 13px;
         }
-        .btn-group {
+        
+        .school-banner {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(88, 166, 255, 0.2);
+            padding-bottom: 15px;
         }
+
+        .logo-img {
+            width: 90px; 
+            height: auto; 
+            border-radius: 50%; 
+            border: 2px solid #58a6ff;
+            background-color: #ffffff; 
+            animation: pulseLogo 3s infinite;
+            box-shadow: 0 0 12px rgba(88, 166, 255, 0.5);
+            padding: 3px;
+            object-fit: contain;
+        }
+        
+        @keyframes pulseLogo {
+            0% { box-shadow: 0 0 0 0 rgba(88, 166, 255, 0.6); }
+            70% { box-shadow: 0 0 0 10px rgba(88, 166, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(88, 166, 255, 0); }
+        }
+
+        .timeline-list { list-style: none; font-size: 13px; }
+        .timeline-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap; 
+        }
+        .time-badge { color: #7ee787; font-weight: 600; margin-right: 10px;}
+
+        .btn-group { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
         .btn {
             background-color: #238636;
             color: white;
-            padding: 10px 18px;
+            padding: 12px 18px;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            border: none;
+            border: 1px solid rgba(255,255,255,0.1);
             cursor: pointer;
             font-family: 'Fira Code', monospace;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            font-size: 13px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            flex-grow: 1; 
+            text-align: center;
         }
-        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn:hover { background-color: #2ea043; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.3); }
         .btn-danger { background-color: #da3633; }
         .btn-danger:hover { background-color: #f85149; }
-        
-        .step { display: none; }
-        .step.active { display: block; animation: fadeIn 0.4s ease-in-out; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .step { display: none; }
+        .step.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            background: #0d1117;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            color: white;
+            width: 100%; padding: 12px;
+            background: rgba(13, 17, 23, 0.6);
+            border: 1px solid rgba(88, 166, 255, 0.4);
+            border-radius: 6px; color: white;
             font-family: 'Fira Code', monospace;
-            margin: 10px 0;
+            margin: 10px 0; font-size: 14px; transition: 0.3s;
+        }
+        input[type="text"]:focus { outline: none; border-color: #58a6ff; box-shadow: 0 0 8px rgba(88,166,255,0.4); }
+
+        @media (max-width: 600px) {
+            .terminal-body { padding: 15px; }
+            .school-banner { flex-direction: column; text-align: center; gap: 10px; }
+            h1 { font-size: 15px; }
+            .box { padding: 10px; font-size: 12px; }
+            .timeline-list li { font-size: 12px; flex-direction: column; gap: 4px; }
+            .btn { width: 100%; } 
+            .typing-command { font-size: 12px; }
         }
     </style>
 </head>
 <body>
+
+<div class="bg-animated"></div>
+<div class="bg-overlay"></div>
 
 <div class="terminal">
     <div class="terminal-header">
@@ -130,93 +203,103 @@
             <div class="circle yellow"></div>
             <div class="circle green"></div>
         </div>
-        <div class="title">nguyen-thanh-tam@graduation-system: ~</div>
+        <div class="title">nguyen-thanh-tam@tlu-graduation-system: ~</div>
     </div>
     
     <div class="terminal-body">
-        <div>
-            <div><span class="prompt">$</span> <span class="command">./load-graduation-party.sh</span></div>
-            
-            <!-- MÀN HÌNH 1: GIỚI THIỆU -->
-            <div id="step-1" class="step active">
-                <div class="output">
-                    <h1>🎓 SYSTEM NOTIFICATION: DEGREE READY</h1>
-                    <p>Chào bạn, hệ thống thông báo quá trình compile 16 năm đèn sách của tôi đã hoàn tất mà không dính lỗi (bug) nào nghiêm trọng.</p>
-                    <div class="box">
-                        <p>📦 <strong>Package:</strong> Graduation_Ceremony_Final.apk</p>
-                        <p>👤 <strong>Author:</strong> Nguyễn Thành Tâm</p>
-                    </div>
-                    <p>> Bạn có muốn kiểm tra Changelog và nhận vé tham dự không?</p>
-                </div>
-                <div class="btn-group">
-                    <button class="btn" onclick="nextStep(2)">[ Next: View Changelog ]</button>
-                </div>
+        <div class="school-banner">
+            <img src="logo-tlu.png" alt="TLU Logo" class="logo-img">
+            <div>
+                <strong style="color: #58a6ff; font-size: 15px; letter-spacing: 0.5px;">TRƯỜNG ĐẠI HỌC THỦY LỢI (TLU)</strong>
+                <div style="font-size: 12px; color: #8b949e; margin-top: 3px;">Lễ Tốt Nghiệp & Trao Bằng Kỹ Sư 2026</div>
             </div>
-
-            <!-- MÀN HÌNH 2: THÔNG TIN SỰ KIỆN -->
-            <div id="step-2" class="step">
-                <div class="output">
-                    <h1>📅 RELEASE NOTES & ENDPOINTS</h1>
-                    <div class="box">
-                        <p>🕒 <strong>Thời gian:</strong> 08:00 AM - Chủ Nhật, XX/XX/2026</p>
-                        <p>📍 <strong>Địa điểm:</strong> Hội trường lớn - Trường Đại học CNTT</p>
-                        <p>🎉 <strong>Mô tả:</strong> Chuyển trạng thái từ <span class="highlight">Student</span> sang <span class="highlight">Unemployed Developer</span>. Rất mong sự hiện diện của bạn!</p>
-                    </div>
-                    <p>> Tiến hành phản hồi hệ thống (RSVP):</p>
-                </div>
-                <div class="btn-group">
-                    <button class="btn" onclick="nextStep(3)">[ Accept Pull Request (Đi nha) ]</button>
-                    <button class="btn btn-danger" onclick="nextStep(4)">[ Close Issue (Bận mất rồi) ]</button>
-                </div>
-            </div>
-
-            <!-- MÀN HÌNH 3: FORM ĐIỀN TÊN KHI ĐỒNG Ý -->
-            <div id="step-3" class="step">
-                <div class="output">
-                    <h1>✅ CONFIRM ATTENDANCE</h1>
-                    <!-- Thay YOUR_FORM_ID bằng ID của bạn ở bước hướng dẫn bên dưới -->
-                    <form action="https://formspree.io/f/xqpaagqq" method="POST" onsubmit="handleRSVP(event, 'ĐI')">
-                        <input type="hidden" name="status" value="Tham gia">
-                        <p>Nhập tên hoặc biệt danh của bạn để hệ thống cấp vé:</p>
-                        <input type="text" name="guest_name" placeholder="Ví dụ: Siêu cấp Coder..." required>
-                        <div class="btn-group">
-                            <button type="submit" class="btn">[ Xác nhận nộp vé ]</button>
-                            <button type="button" class="btn btn-danger" onclick="nextStep(2)">[ Quay lại ]</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- MÀN HÌNH 4: KHI TỪ CHỐI -->
-            <div id="step-4" class="step">
-                <div class="output">
-                    <h1>❌ TỪ CHỐI THAM GIA?</h1>
-                    <form action="https://formspree.io/f/xqpaagqq" method="POST" onsubmit="handleRSVP(event, 'TỪ CHỐI')">
-                        <input type="hidden" name="status" value="Từ chối">
-                        <p style="color: #f85149;">Cảnh báo: Từ chối nhận quà và đồ ăn miễn phí là một hành vi đáng ngờ! Hãy nhập tên và lý do để "gửi khiếu nại":</p>
-                        <input type="text" name="guest_name" placeholder="Tên bạn..." required>
-                        <input type="text" name="reason" placeholder="Lý do (Ví dụ: Bận fix bug, kẹt code...)" required>
-                        <div class="btn-group">
-                            <button type="submit" class="btn btn-danger">[ Gửi đơn từ chối ]</button>
-                            <button type="button" class="btn" onclick="nextStep(2)">[ Suy nghĩ lại, đổi ý đi ]</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- MÀN HÌNH 5: HOÀN TẤT -->
-            <div id="step-5" class="step">
-                <div class="output">
-                    <h1>🚀 STATUS: SUCCESSFUL!</h1>
-                    <div class="box" style="color: #3fb950;">
-                        <p id="thank-you-msg">Dữ liệu đã được push lên server thành công!</p>
-                    </div>
-                    <p>Cảm ơn bạn đã phản hồi. Hẹn gặp lại vào ngày tốt nghiệp!</p>
-                </div>
-            </div>
-
         </div>
-        <div><span class="prompt">$</span> <span class="command">_</span></div>
+
+        <div style="margin-bottom: 15px;">
+            <span class="prompt">$</span> <span class="typing-command">./load-invitation.sh --verbose</span>
+        </div>
+        
+        <div id="step-1" class="step active">
+            <div class="output">
+                <h1><span style="color: #f0883e;">[ SUCCESS ]</span> SYSTEM NOTIFICATION: DEGREE READY</h1>
+                <p>Hệ thống thông báo quá trình compile 16 năm đèn sách của tôi đã hoàn tất mà không dính lỗi bug nghiêm trọng nào.</p>
+                <div class="box">
+                    <p>📦 <strong>Package:</strong> Bachelor_Degree_CNTT.apk</p>
+                    <p>👤 <strong>Author:</strong> Nguyễn Thành Tâm</p>
+                    <p>⚡ <strong>Major:</strong> Information Technology</p>
+                </div>
+                <p style="color: #8b949e;">> Mời đồng chí kiểm tra Changelog chi tiết chương trình:</p>
+            </div>
+            <div class="btn-group">
+                <button class="btn" onclick="nextStep(2)">[ Next: View Timeline ]</button>
+            </div>
+        </div>
+
+        <div id="step-2" class="step">
+            <div class="output">
+                <h1>📅 CHƯƠNG TRÌNH LỄ TỐT NGHIỆP 2026</h1>
+                <div class="box" style="max-height: 250px; overflow-y: auto;">
+                    <ul class="timeline-list">
+                        <li><span class="time-badge">07h30 - 08h00</span> Đón tiếp đại biểu</li>
+                        <li><span class="time-badge">08h00 - 08h15</span> Văn nghệ chào mừng</li>
+                        <li><span class="time-badge">08h15 - 08h30</span> Khai mạc chương trình</li>
+                        <li><span class="time-badge">08h30 - 08h50</span> Báo cáo tổng kết & quyết định tốt nghiệp</li>
+                        <li><span class="time-badge">08h50 - 09h10</span> Trao bằng khen tân khoa xuất sắc</li>
+                        <li><span class="time-badge">09h10 - 09h30</span> Lãnh đạo & đại diện phát biểu</li>
+                        <li><span class="time-badge">10h00 - 11h55</span> <strong style="color:#58a6ff;">Trao bằng Kỹ sư, Cử nhân CNTT</strong></li>
+                        <li><span class="time-badge">11h55 - 12h00</span> Bế mạc</li>
+                    </ul>
+                </div>
+                <p>📍 <strong>Địa điểm:</strong> Hội trường 500 Chỗ, 68 CMT8, P. Thuận An, TP. HCM</p>
+                <p>⏰ <strong>Thời gian:</strong> Chủ nhật, ngày 27/09/2026</p>
+                
+                <p style="margin-top: 15px; color: #8b949e;">> Tiến hành phản hồi hệ thống (RSVP):</p>
+            </div>
+            <div class="btn-group">
+                <button class="btn" onclick="nextStep(3)">[ Accept Pull Request (Đi nha) ]</button>
+                <button class="btn btn-danger" onclick="nextStep(4)">[ Close Issue (Bận mất rồi) ]</button>
+            </div>
+        </div>
+
+        <div id="step-3" class="step">
+            <div class="output">
+                <h1>✅ CONFIRM ATTENDANCE</h1>
+                <form onsubmit="handleRSVP(event, 'ĐI')">
+                    <p>Nhập tên hoặc biệt danh để tôi chuẩn bị tài nguyên (bánh kẹo, nước ngọt):</p>
+                    <input type="text" id="guest-name-yes" placeholder="Ví dụ: Siêu cấp Coder..." required>
+                    <div class="btn-group">
+                        <button type="submit" class="btn">[ Xác nhận tham gia ]</button>
+                        <button type="button" class="btn btn-danger" onclick="nextStep(2)">[ Quay lại ]</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="step-4" class="step">
+            <div class="output">
+                <h1>❌ TỪ CHỐI THAM GIA?</h1>
+                <form onsubmit="handleRSVP(event, 'TỪ CHỐI')">
+                    <p style="color: #f85149;">Cảnh báo: Từ chối nhận quà tốt nghiệp là hành vi đáng ngờ! Hãy để lại danh tính:</p>
+                    <input type="text" id="guest-name-no" placeholder="Tên bạn..." required>
+                    <input type="text" id="guest-reason" placeholder="Lý do vắng mặt..." required>
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-danger">[ Gửi đơn khiếu nại ]</button>
+                        <button type="button" class="btn" onclick="nextStep(2)">[ Đổi ý, đi nha ]</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="step-5" class="step">
+            <div class="output">
+                <h1>🚀 STATUS: SUCCESSFUL!</h1>
+                <div class="box" style="color: #3fb950; text-align: center; font-size: 15px;">
+                    <p id="thank-you-msg">Đã ghi nhận phản hồi vào hệ thống thành công!</p>
+                </div>
+                <!-- Đã thêm ID vào dòng này để JS có thể thay đổi nội dung -->
+                <p id="final-closing-msg" style="text-align: center;"></p>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -228,28 +311,18 @@
 
     function handleRSVP(event, type) {
         event.preventDefault();
-        const form = event.target;
-        const formData = new FormData(form);
+        const finalMsg = document.getElementById('final-closing-msg');
 
-        // Gửi ngầm dữ liệu lên Formspree mà không bị chuyển trang
-        fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: { 'Accept': 'application/json' }
-        }).then(response => {
-            if (response.ok) {
-                if(type === 'ĐI') {
-                    document.getElementById('thank-you-msg').innerHTML = "✔ Merge thành công! Đã ghi nhận bạn vào danh sách 'Khách VIP'.";
-                } else {
-                    document.getElementById('thank-you-msg').innerHTML = "⚠ Đã nhận 'đơn khiếu nại' vắng mặt của bạn. Hẹn gặp dịp khác nhé!";
-                }
-                nextStep(5);
-            } else {
-                alert('Có lỗi mạng xảy ra, bạn thử lại nhé!');
-            }
-        }).catch(error => {
-            alert('Có lỗi xảy ra, vui lòng thử lại.');
-        });
+        if(type === 'ĐI') {
+            const name = document.getElementById('guest-name-yes').value;
+            document.getElementById('thank-you-msg').innerHTML = `✔ Merge thành công! Đã ghi nhận <strong>${name}</strong> vào danh sách Khách VIP.`;
+            finalMsg.innerHTML = "Cảm ơn bạn rất nhiều. Hẹn gặp bạn tại buổi lễ tốt nghiệp!";
+        } else {
+            const name = document.getElementById('guest-name-no').value;
+            document.getElementById('thank-you-msg').innerHTML = `⚠ Đã nhận 'đơn vắng mặt' của <strong>${name}</strong>. Hẹn dịp gần nhất nhé!`;
+            finalMsg.innerHTML = "Cảm ơn bạn đã báo trước. Chúc bạn một ngày tốt lành và hẹn gặp vào dịp khác nhé!";
+        }
+        nextStep(5);
     }
 </script>
 
