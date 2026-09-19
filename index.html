@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TLU Graduation Release - v3.4.0 (Final)</title>
+    <title>TLU Graduation Release - v3.5.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -261,14 +261,14 @@
             </div>
         </div>
 
+        <!-- MÀN HÌNH 3: FORM THAM GIA (DÙNG LẠI status VÀ guest_name) -->
         <div id="step-3" class="step">
             <div class="output">
                 <h1>✅ CONFIRM ATTENDANCE</h1>
-                <!-- Sửa lại action thành link formspree và thêm thuộc tính name -->
                 <form action="https://formspree.io/f/xqpaagqq" method="POST" onsubmit="handleRSVP(event, 'ĐI')">
-                    <input type="hidden" name="TrangThai" value="THAM GIA">
+                    <input type="hidden" name="status" value="Tham gia">
                     <p>Nhập tên hoặc biệt danh để tôi chuẩn bị tài nguyên (bánh kẹo, nước ngọt):</p>
-                    <input type="text" name="TenKhach" id="guest-name-yes" placeholder="Ví dụ: Siêu cấp Coder..." required>
+                    <input type="text" name="guest_name" id="guest-name-yes" placeholder="Ví dụ: Siêu cấp Coder..." required>
                     <div class="btn-group">
                         <button type="submit" id="btn-submit-yes" class="btn">[ Xác nhận tham gia ]</button>
                         <button type="button" class="btn btn-danger" onclick="nextStep(2)">[ Quay lại ]</button>
@@ -277,15 +277,15 @@
             </div>
         </div>
 
+        <!-- MÀN HÌNH 4: FORM TỪ CHỐI (DÙNG LẠI status, guest_name VÀ reason) -->
         <div id="step-4" class="step">
             <div class="output">
                 <h1>❌ TỪ CHỐI THAM GIA?</h1>
-                <!-- Sửa lại action thành link formspree và thêm thuộc tính name -->
                 <form action="https://formspree.io/f/xqpaagqq" method="POST" onsubmit="handleRSVP(event, 'TỪ CHỐI')">
-                    <input type="hidden" name="TrangThai" value="TU CHOI">
+                    <input type="hidden" name="status" value="Từ chối">
                     <p style="color: #f85149;">Cảnh báo: Từ chối nhận quà tốt nghiệp là hành vi đáng ngờ! Hãy để lại danh tính:</p>
-                    <input type="text" name="TenKhach" id="guest-name-no" placeholder="Tên bạn..." required>
-                    <input type="text" name="LyDo" id="guest-reason" placeholder="Lý do vắng mặt..." required>
+                    <input type="text" name="guest_name" id="guest-name-no" placeholder="Tên bạn..." required>
+                    <input type="text" name="reason" id="guest-reason" placeholder="Lý do vắng mặt..." required>
                     <div class="btn-group">
                         <button type="submit" id="btn-submit-no" class="btn btn-danger">[ Gửi đơn khiếu nại ]</button>
                         <button type="button" class="btn" onclick="nextStep(2)">[ Đổi ý, đi nha ]</button>
@@ -294,6 +294,7 @@
             </div>
         </div>
 
+        <!-- MÀN HÌNH 5: HOÀN TẤT -->
         <div id="step-5" class="step">
             <div class="output">
                 <h1>🚀 STATUS: SUCCESSFUL!</h1>
@@ -317,13 +318,11 @@
         const form = event.target;
         const data = new FormData(form);
         
-        // Đổi chữ nút thành Đang xử lý để người dùng biết code đang chạy
         const btnSubmit = type === 'ĐI' ? document.getElementById('btn-submit-yes') : document.getElementById('btn-submit-no');
         const originalText = btnSubmit.innerHTML;
         btnSubmit.innerHTML = "[ Đang gửi dữ liệu... ]";
         btnSubmit.disabled = true;
 
-        // Bắn dữ liệu ngầm lên Formspree
         fetch(form.action, {
             method: form.method,
             body: data,
@@ -344,12 +343,12 @@
                 }
                 nextStep(5);
             } else {
-                alert("Ối, có lỗi khi gửi dữ liệu rồi. Bạn thử lại nhé!");
+                alert("Có lỗi khi gửi dữ liệu. Vui lòng kiểm tra lại ID Formspree!");
                 btnSubmit.innerHTML = originalText;
                 btnSubmit.disabled = false;
             }
         }).catch(error => {
-            alert("Lỗi mạng rồi, không thể kết nối tới server!");
+            alert("Lỗi kết nối mạng, vui lòng thử lại!");
             btnSubmit.innerHTML = originalText;
             btnSubmit.disabled = false;
         });
