@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graduation Release - v1.0.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Fira Code', monospace;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .terminal {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 650px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            overflow: hidden;
+        }
+        .terminal-header {
+            background-color: #21262d;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #30363d;
+        }
+        .buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .circle {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .red { background-color: #ff5f56; }
+        .yellow { background-color: #ffbd2e; }
+        .green { background-color: #27c93f; }
+        .title {
+            margin-left: 15px;
+            font-size: 13px;
+            color: #8b949e;
+        }
+        .terminal-body {
+            padding: 25px;
+            line-height: 1.6;
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .prompt { color: #58a6ff; }
+        .command { color: #7ee787; }
+        
+        h1 {
+            color: #58a6ff;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .highlight { color: #f0883e; }
+        .box {
+            border: 1px dashed #30363d;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            background-color: #0d1117;
+            font-size: 14px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background-color: #238636;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-danger { background-color: #da3633; }
+        .btn-danger:hover { background-color: #f85149; }
+        
+        .step { display: none; }
+        .step.active { display: block; animation: fadeIn 0.4s ease-in-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: white;
+            font-family: 'Fira Code', monospace;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="terminal">
+    <div class="terminal-header">
+        <div class="buttons">
+            <div class="circle red"></div>
+            <div class="circle yellow"></div>
+            <div class="circle green"></div>
+        </div>
+        <div class="title">nguyen-thanh-tam@graduation-system: ~</div>
+    </div>
+    
+    <div class="terminal-body">
+        <div>
+            <div><span class="prompt">$</span> <span class="command">./load-graduation-party.sh</span></div>
+            
+            <!-- MÀN HÌNH 1: GIỚI THIỆU -->
+            <div id="step-1" class="step active">
+                <div class="output">
+                    <h1>🎓 SYSTEM NOTIFICATION: DEGREE READY</h1>
+                    <p>Chào bạn, hệ thống thông báo quá trình compile 16 năm đèn sách của tôi đã hoàn tất mà không dính lỗi (bug) nào nghiêm trọng.</p>
+                    <div class="box">
+                        <p>📦 <strong>Package:</strong> Graduation_Ceremony_Final.apk</p>
+                        <p>👤 <strong>Author:</strong> Nguyễn Thành Tâm</p>
+                    </div>
+                    <p>> Bạn có muốn kiểm tra Changelog và nhận vé tham dự không?</p>
+                </div>
+                <div class="btn-group">
+                    <button class="btn" onclick="nextStep(2)">[ Next: View Changelog ]</button>
+                </div>
+            </div>
+
+            <!-- MÀN HÌNH 2: THÔNG TIN SỰ KIỆN -->
+            <div id="step-2" class="step">
+                <div class="output">
+                    <h1>📅 RELEASE NOTES & ENDPOINTS</h1>
+                    <div class="box">
+                        <p>🕒 <strong>Thời gian:</strong> 08:00 AM - Chủ Nhật, XX/XX/2026</p>
+                        <p>📍 <strong>Địa điểm:</strong> Hội trường lớn - Trường Đại học CNTT</p>
+                        <p>🎉 <strong>Mô tả:</strong> Chuyển trạng thái từ <span class="highlight">Student</span> sang <span class="highlight">Unemployed Developer</span>. Rất mong sự hiện diện của bạn!</p>
+                    </div>
+                    <p>> Tiến hành phản hồi hệ thống (RSVP):</p>
+                </div>
+                <div class="btn-group">
+                    <button class="btn" onclick="nextStep(3)">[ Accept Pull Request (Đi nha) ]</button>
+                    <button class="btn btn-danger" onclick="nextStep(4)">[ Close Issue (Bận mất rồi) ]</button>
+                </div>
+            </div>
+
+            <!-- MÀN HÌNH 3: FORM ĐIỀN TÊN KHI ĐỒNG Ý -->
+            <div id="step-3" class="step">
+                <div class="output">
+                    <h1>✅ CONFIRM ATTENDANCE</h1>
+                    <!-- Thay YOUR_FORM_ID bằng ID của bạn ở bước hướng dẫn bên dưới -->
+                    <form action="https://formspree.io/f/xqpaagqq" method="POST" onsubmit="handleRSVP(event, 'ĐI')">
+                        <input type="hidden" name="status" value="Tham gia">
+                        <p>Nhập tên hoặc biệt danh của bạn để hệ thống cấp vé:</p>
+                        <input type="text" name="guest_name" placeholder="Ví dụ: Siêu cấp Coder..." required>
+                        <div class="btn-group">
+                            <button type="submit" class="btn">[ Xác nhận nộp vé ]</button>
+                            <button type="button" class="btn btn-danger" onclick="nextStep(2)">[ Quay lại ]</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MÀN HÌNH 4: KHI TỪ CHỐI -->
+            <div id="step-4" class="step">
+                <div class="output">
+                    <h1>❌ TỪ CHỐI THAM GIA?</h1>
+                    <form action="https://formspree.io/f/xqpaagqq" method="POST" onsubmit="handleRSVP(event, 'TỪ CHỐI')">
+                        <input type="hidden" name="status" value="Từ chối">
+                        <p style="color: #f85149;">Cảnh báo: Từ chối nhận quà và đồ ăn miễn phí là một hành vi đáng ngờ! Hãy nhập tên và lý do để "gửi khiếu nại":</p>
+                        <input type="text" name="guest_name" placeholder="Tên bạn..." required>
+                        <input type="text" name="reason" placeholder="Lý do (Ví dụ: Bận fix bug, kẹt code...)" required>
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-danger">[ Gửi đơn từ chối ]</button>
+                            <button type="button" class="btn" onclick="nextStep(2)">[ Suy nghĩ lại, đổi ý đi ]</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MÀN HÌNH 5: HOÀN TẤT -->
+            <div id="step-5" class="step">
+                <div class="output">
+                    <h1>🚀 STATUS: SUCCESSFUL!</h1>
+                    <div class="box" style="color: #3fb950;">
+                        <p id="thank-you-msg">Dữ liệu đã được push lên server thành công!</p>
+                    </div>
+                    <p>Cảm ơn bạn đã phản hồi. Hẹn gặp lại vào ngày tốt nghiệp!</p>
+                </div>
+            </div>
+
+        </div>
+        <div><span class="prompt">$</span> <span class="command">_</span></div>
+    </div>
+</div>
+
+<script>
+    function nextStep(stepNumber) {
+        document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+        document.getElementById('step-' + stepNumber).classList.add('active');
+    }
+
+    function handleRSVP(event, type) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        // Gửi ngầm dữ liệu lên Formspree mà không bị chuyển trang
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        }).then(response => {
+            if (response.ok) {
+                if(type === 'ĐI') {
+                    document.getElementById('thank-you-msg').innerHTML = "✔ Merge thành công! Đã ghi nhận bạn vào danh sách 'Khách VIP'.";
+                } else {
+                    document.getElementById('thank-you-msg').innerHTML = "⚠ Đã nhận 'đơn khiếu nại' vắng mặt của bạn. Hẹn gặp dịp khác nhé!";
+                }
+                nextStep(5);
+            } else {
+                alert('Có lỗi mạng xảy ra, bạn thử lại nhé!');
+            }
+        }).catch(error => {
+            alert('Có lỗi xảy ra, vui lòng thử lại.');
+        });
+    }
+</script>
+
+</body>
+</html>
