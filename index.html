@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TLU Graduation Release - v3.5.0</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <title>TLU Graduation Release - v5.0 (Personalized)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Caveat:wght@700&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
@@ -45,7 +45,7 @@
             border: 1px solid rgba(88, 166, 255, 0.3);
             border-radius: 12px;
             width: 95%; 
-            max-width: 700px;
+            max-width: 600px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 20px rgba(88, 166, 255, 0.1);
             animation: slideUpFade 1s ease-out forwards, floatTerminal 6s ease-in-out infinite;
             display: flex;
@@ -78,7 +78,7 @@
         .title { margin-left: 15px; font-size: 13px; color: #8b949e; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         
         .terminal-body {
-            padding: 25px;
+            padding: 20px;
             line-height: 1.6;
             overflow-y: auto;
             flex-grow: 1;
@@ -116,7 +116,6 @@
             border-bottom: 1px solid rgba(88, 166, 255, 0.2);
             padding-bottom: 15px;
         }
-
         .logo-img {
             width: 90px; 
             height: auto; 
@@ -128,22 +127,11 @@
             padding: 3px;
             object-fit: contain;
         }
-        
         @keyframes pulseLogo {
             0% { box-shadow: 0 0 0 0 rgba(88, 166, 255, 0.6); }
             70% { box-shadow: 0 0 0 10px rgba(88, 166, 255, 0); }
             100% { box-shadow: 0 0 0 0 rgba(88, 166, 255, 0); }
         }
-
-        .timeline-list { list-style: none; font-size: 13px; }
-        .timeline-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap; 
-        }
-        .time-badge { color: #7ee787; font-weight: 600; margin-right: 10px;}
 
         .btn-group { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
         .btn {
@@ -165,29 +153,118 @@
         .btn:hover { background-color: #2ea043; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.3); }
         .btn-danger { background-color: #da3633; }
         .btn-danger:hover { background-color: #f85149; }
+        .btn:disabled { opacity: 0.7; cursor: not-allowed; }
 
         .step { display: none; }
         .step.active { display: block; animation: fadeIn 0.5s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        input[type="text"] {
-            width: 100%; padding: 12px;
-            background: rgba(13, 17, 23, 0.6);
-            border: 1px solid rgba(88, 166, 255, 0.4);
-            border-radius: 6px; color: white;
-            font-family: 'Fira Code', monospace;
-            margin: 10px 0; font-size: 14px; transition: 0.3s;
+        /* --- THIẾT KẾ CARD SCRAPBOOK --- */
+        .scrapbook-card {
+            background-color: #fcfbfa; 
+            color: #5c4a3d;
+            font-family: 'Montserrat', sans-serif;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            position: relative;
+            text-align: center;
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
         }
-        input[type="text"]:focus { outline: none; border-color: #58a6ff; box-shadow: 0 0 8px rgba(88,166,255,0.4); }
+        .scrapbook-header {
+            font-family: 'Caveat', cursive;
+            font-size: 38px;
+            color: #9a7b5c;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        .scrapbook-title {
+            font-weight: 800;
+            font-size: 20px;
+            color: #a67c52;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .photo-frame {
+            background: #fff;
+            padding: 8px 8px 25px 8px;
+            box-shadow: 2px 4px 10px rgba(0,0,0,0.15);
+            transform: rotate(-1deg);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .photo-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border: 1px solid #eee;
+        }
+        .paper-tape {
+            position: absolute;
+            background-color: rgba(234, 222, 206, 0.95);
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            font-family: 'Caveat', cursive;
+            color: #5c4a3d;
+            padding: 5px 15px;
+            z-index: 2;
+        }
+        /* Nhãn Chủ Tọa (Trái) */
+        .tape-1 { 
+            top: 15px; 
+            left: -10px; 
+            transform: rotate(-3deg); 
+            font-size: 20px;
+        }
+        /* Nhãn Khách Mời (Phải - Mới thêm) */
+        .tape-2 { 
+            bottom: -15px; 
+            right: 5px; 
+            transform: rotate(2deg); 
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        .event-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 12px;
+            text-align: center;
+        }
+        .event-col { flex: 1; padding: 0 5px; }
+        .event-divider {
+            width: 1px;
+            height: 60px;
+            background-color: #5c4a3d;
+            opacity: 0.3;
+        }
+        .highlight-text {
+            font-weight: 700;
+            color: #222;
+            font-size: 14px;
+            margin: 3px 0;
+        }
+        .scrapbook-footer {
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 15px;
+            color: #222;
+        }
+        .phone-contact {
+            margin-top: 10px;
+            font-weight: 600;
+            font-size: 13px;
+        }
 
         @media (max-width: 600px) {
             .terminal-body { padding: 15px; }
             .school-banner { flex-direction: column; text-align: center; gap: 10px; }
-            h1 { font-size: 15px; }
-            .box { padding: 10px; font-size: 12px; }
-            .timeline-list li { font-size: 12px; flex-direction: column; gap: 4px; }
             .btn { width: 100%; } 
-            .typing-command { font-size: 12px; }
+            .photo-img { height: 150px; }
+            .scrapbook-header { font-size: 32px; }
+            .scrapbook-title { font-size: 18px; }
         }
     </style>
 </head>
@@ -207,19 +284,19 @@
     </div>
     
     <div class="terminal-body">
-        <div class="school-banner">
-            <img src="logo-tlu.png" alt="TLU Logo" class="logo-img">
-            <div>
-                <strong style="color: #58a6ff; font-size: 15px; letter-spacing: 0.5px;">TRƯỜNG ĐẠI HỌC THỦY LỢI (TLU)</strong>
-                <div style="font-size: 12px; color: #8b949e; margin-top: 3px;">Lễ Tốt Nghiệp & Trao Bằng Kỹ Sư 2026</div>
-            </div>
-        </div>
-
-        <div style="margin-bottom: 15px;">
-            <span class="prompt">$</span> <span class="typing-command">./load-invitation.sh --verbose</span>
-        </div>
         
+        <!-- BƯỚC 1: INTRO -->
         <div id="step-1" class="step active">
+            <div class="school-banner">
+                <img src="logo-tlu.png" alt="TLU Logo" class="logo-img">
+                <div>
+                    <strong style="color: #58a6ff; font-size: 15px; letter-spacing: 0.5px;">TRƯỜNG ĐẠI HỌC THỦY LỢI (TLU)</strong>
+                    <div style="font-size: 12px; color: #8b949e; margin-top: 3px;">Lễ Tốt Nghiệp & Trao Bằng Kỹ Sư 2026</div>
+                </div>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <span class="prompt">$</span> <span class="typing-command">./load-invitation.sh --verbose</span>
+            </div>
             <div class="output">
                 <h1><span style="color: #f0883e;">[ SUCCESS ]</span> SYSTEM NOTIFICATION: DEGREE READY</h1>
                 <p>Hệ thống thông báo quá trình compile 16 năm đèn sách của tôi đã hoàn tất mà không dính lỗi bug nghiêm trọng nào.</p>
@@ -228,130 +305,126 @@
                     <p>👤 <strong>Author:</strong> Nguyễn Thành Tâm</p>
                     <p>⚡ <strong>Major:</strong> Information Technology</p>
                 </div>
-                <p style="color: #8b949e;">> Mời đồng chí kiểm tra Changelog chi tiết chương trình:</p>
+                <p style="color: #8b949e;">> Hệ thống đang render thiệp mời cá nhân hóa...</p>
             </div>
             <div class="btn-group">
-                <button class="btn" onclick="nextStep(2)">[ Next: View Timeline ]</button>
+                <button class="btn" onclick="nextStep(2)">[ Next: View Invitation Card ]</button>
             </div>
         </div>
 
+        <!-- BƯỚC 2: THIỆP SCRAPBOOK CÁ NHÂN HÓA -->
         <div id="step-2" class="step">
-            <div class="output">
-                <h1>📅 CHƯƠNG TRÌNH LỄ TỐT NGHIỆP 2026</h1>
-                <div class="box" style="max-height: 250px; overflow-y: auto;">
-                    <ul class="timeline-list">
-                        <li><span class="time-badge">07h30 - 08h00</span> Đón tiếp đại biểu</li>
-                        <li><span class="time-badge">08h00 - 08h15</span> Văn nghệ chào mừng</li>
-                        <li><span class="time-badge">08h15 - 08h30</span> Khai mạc chương trình</li>
-                        <li><span class="time-badge">08h30 - 08h50</span> Báo cáo tổng kết & quyết định tốt nghiệp</li>
-                        <li><span class="time-badge">08h50 - 09h10</span> Trao bằng khen tân khoa xuất sắc</li>
-                        <li><span class="time-badge">09h10 - 09h30</span> Lãnh đạo & đại diện phát biểu</li>
-                        <li><span class="time-badge">10h00 - 11h55</span> <strong style="color:#58a6ff;">Trao bằng Kỹ sư, Cử nhân CNTT</strong></li>
-                        <li><span class="time-badge">11h55 - 12h00</span> Bế mạc</li>
-                    </ul>
-                </div>
-                <p>📍 <strong>Địa điểm:</strong> Hội trường 500 Chỗ, 68 CMT8, P. Thuận An, TP. HCM</p>
-                <p>⏰ <strong>Thời gian:</strong> Chủ nhật, ngày 27/09/2026</p>
+            <div class="scrapbook-card">
+                <div class="scrapbook-header">Happy</div>
+                <div class="scrapbook-title">Graduation</div>
                 
-                <p style="margin-top: 15px; color: #8b949e;">> Tiến hành phản hồi hệ thống (RSVP):</p>
+                <div class="photo-frame">
+                    <img src="school-photo.jpg" class="photo-img" alt="TLU Campus">
+                    <div class="paper-tape tape-1">Xin chào, mình là<br><strong style="font-size: 24px;">Thành Tâm</strong></div>
+                    
+                    <!-- Nhãn khách mời được tự động điền bằng JS -->
+                    <div class="paper-tape tape-2">Thân mời<br><strong id="guest-name-display" style="font-size: 22px;">Bạn</strong></div>
+                </div>
+                
+                <div class="event-details">
+                    <div class="event-col">
+                        <div style="color: #9a7b5c; font-weight: 700;">THỜI GIAN</div>
+                        <div class="highlight-text">CHỦ NHẬT</div>
+                        <div>27.09.2026</div>
+                        <div>11:30</div>
+                    </div>
+                    
+                    <div class="event-divider"></div>
+                    
+                    <div class="event-col">
+                        <div style="color: #9a7b5c; font-weight: 700;">ĐỊA ĐIỂM</div>
+                        <div class="highlight-text">ĐẠI HỌC THỦY LỢI</div>
+                        <div>68 Cách mạng tháng Tám,</div>
+                        <div>P. Thuận An, TP. HCM</div>
+                    </div>
+                </div>
+                
+                <div class="phone-contact">📞 0923 074 610</div>
+                <div class="scrapbook-footer">Sự hiện diện của bạn là niềm vinh hạnh của tôi!</div>
             </div>
+            
+            <p style="margin-top: 20px; color: #8b949e;">> Xác nhận tham gia sự kiện (RSVP):</p>
+            
             <div class="btn-group">
-                <button class="btn" onclick="nextStep(3)">[ Accept Pull Request (Đi nha) ]</button>
-                <button class="btn btn-danger" onclick="nextStep(4)">[ Close Issue (Bận mất rồi) ]</button>
+                <!-- Chuyển onclick gọi thẳng hàm xử lý gửi dữ liệu -->
+                <button id="btn-submit-yes" class="btn" onclick="handleDirectRSVP('ĐI')">[ Accept Pull Request (Đi nha) ]</button>
+                <button id="btn-submit-no" class="btn btn-danger" onclick="handleDirectRSVP('TỪ CHỐI')">[ Close Issue (Bận mất rồi) ]</button>
             </div>
         </div>
 
-        <!-- MÀN HÌNH 3: FORM THAM GIA (DÙNG LẠI status VÀ guest_name) -->
+        <!-- BƯỚC 3: MÀN HÌNH HOÀN TẤT CUỐI CÙNG -->
         <div id="step-3" class="step">
-            <div class="output">
-                <h1>✅ CONFIRM ATTENDANCE</h1>
-                <form action="https://formspree.io/f/xqpaagqq" method="POST" onsubmit="handleRSVP(event, 'ĐI')">
-                    <input type="hidden" name="status" value="Tham gia">
-                    <p>Nhập tên hoặc biệt danh để tôi chuẩn bị tài nguyên (bánh kẹo, nước ngọt):</p>
-                    <input type="text" name="guest_name" id="guest-name-yes" placeholder="Ví dụ: Siêu cấp Coder..." required>
-                    <div class="btn-group">
-                        <button type="submit" id="btn-submit-yes" class="btn">[ Xác nhận tham gia ]</button>
-                        <button type="button" class="btn btn-danger" onclick="nextStep(2)">[ Quay lại ]</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- MÀN HÌNH 4: FORM TỪ CHỐI (DÙNG LẠI status, guest_name VÀ reason) -->
-        <div id="step-4" class="step">
-            <div class="output">
-                <h1>❌ TỪ CHỐI THAM GIA?</h1>
-                <form action="https://formspree.io/f/xqpaagqq" method="POST" onsubmit="handleRSVP(event, 'TỪ CHỐI')">
-                    <input type="hidden" name="status" value="Từ chối">
-                    <p style="color: #f85149;">Cảnh báo: Từ chối nhận quà tốt nghiệp là hành vi đáng ngờ! Hãy để lại danh tính:</p>
-                    <input type="text" name="guest_name" id="guest-name-no" placeholder="Tên bạn..." required>
-                    <input type="text" name="reason" id="guest-reason" placeholder="Lý do vắng mặt..." required>
-                    <div class="btn-group">
-                        <button type="submit" id="btn-submit-no" class="btn btn-danger">[ Gửi đơn khiếu nại ]</button>
-                        <button type="button" class="btn" onclick="nextStep(2)">[ Đổi ý, đi nha ]</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- MÀN HÌNH 5: HOÀN TẤT -->
-        <div id="step-5" class="step">
             <div class="output">
                 <h1>🚀 STATUS: SUCCESSFUL!</h1>
                 <div class="box" style="color: #3fb950; text-align: center; font-size: 15px;">
                     <p id="thank-you-msg">Đã ghi nhận phản hồi vào hệ thống thành công!</p>
                 </div>
-                <p id="final-closing-msg" style="text-align: center;"></p>
+                <p id="final-closing-msg" style="text-align: center; line-height: 1.6;"></p>
             </div>
         </div>
     </div>
 </div>
 
 <script>
+    // 1. Lấy tên khách mời từ URL tự động điền vào thiệp
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestName = urlParams.get('to') || 'Bạn'; // Nếu link không có ?to= thì mặc định là "Bạn"
+    document.getElementById('guest-name-display').innerText = guestName;
+
     function nextStep(stepNumber) {
         document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
         document.getElementById('step-' + stepNumber).classList.add('active');
     }
 
-    function handleRSVP(event, type) {
-        event.preventDefault(); 
-        const form = event.target;
-        const data = new FormData(form);
-        
+    // 2. Hàm gửi dữ liệu ngầm tự động không cần Form HTML
+    function handleDirectRSVP(type) {
+        // Đổi trạng thái nút bấm
         const btnSubmit = type === 'ĐI' ? document.getElementById('btn-submit-yes') : document.getElementById('btn-submit-no');
         const originalText = btnSubmit.innerHTML;
         btnSubmit.innerHTML = "[ Đang gửi dữ liệu... ]";
-        btnSubmit.disabled = true;
+        document.getElementById('btn-submit-yes').disabled = true;
+        document.getElementById('btn-submit-no').disabled = true;
 
-        fetch(form.action, {
-            method: form.method,
-            body: data,
-            headers: {
-                'Accept': 'application/json'
-            }
+        // Tạo dữ liệu để gửi
+        const formData = new FormData();
+        formData.append('guest_name', guestName);
+        formData.append('status', type === 'ĐI' ? 'Tham gia' : 'Từ chối');
+
+        // Gửi lên Formspree (NHỚ THAY YOUR_FORM_ID CỦA BẠN VÀO ĐÂY)
+        fetch('https://formspree.io/f/mppwqzyg', {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
         }).then(response => {
             if (response.ok) {
                 const finalMsg = document.getElementById('final-closing-msg');
                 if(type === 'ĐI') {
-                    const name = document.getElementById('guest-name-yes').value;
-                    document.getElementById('thank-you-msg').innerHTML = `✔ Merge thành công! Đã ghi nhận <strong>${name}</strong> vào danh sách Khách VIP.`;
-                    finalMsg.innerHTML = "Cảm ơn bạn rất nhiều. Hẹn gặp bạn tại buổi lễ tốt nghiệp!";
+                    document.getElementById('thank-you-msg').innerHTML = `✔ Merge thành công! Đã ghi nhận <strong>${guestName}</strong> vào danh sách Khách VIP.`;
+                    finalMsg.innerHTML = "Cảm ơn bạn rất nhiều.<br>Hẹn gặp bạn tại buổi lễ tốt nghiệp nhé!";
                 } else {
-                    const name = document.getElementById('guest-name-no').value;
-                    document.getElementById('thank-you-msg').innerHTML = `⚠ Đã nhận 'đơn vắng mặt' của <strong>${name}</strong>. Hẹn dịp gần nhất nhé!`;
-                    finalMsg.innerHTML = "Cảm ơn bạn đã báo trước. Chúc bạn code mượt mà, không dính bug và hẹn gặp vào dịp khác nhé!";
+                    document.getElementById('thank-you-msg').innerHTML = `⚠ Đã nhận phản hồi vắng mặt của <strong>${guestName}</strong>.`;
+                    finalMsg.innerHTML = "Cảm ơn bạn đã báo trước.<br>Chúc bạn một ngày vui vẻ và hẹn gặp lại ở dịp khác nhé!";
                 }
-                nextStep(5);
+                nextStep(3); // Chuyển thẳng sang trang cuối
             } else {
-                alert("Có lỗi khi gửi dữ liệu. Vui lòng kiểm tra lại ID Formspree!");
-                btnSubmit.innerHTML = originalText;
-                btnSubmit.disabled = false;
+                alert("Có lỗi khi gửi dữ liệu. Vui lòng thử lại!");
+                resetButtons(btnSubmit, originalText);
             }
         }).catch(error => {
             alert("Lỗi kết nối mạng, vui lòng thử lại!");
-            btnSubmit.innerHTML = originalText;
-            btnSubmit.disabled = false;
+            resetButtons(btnSubmit, originalText);
         });
+    }
+
+    function resetButtons(btn, text) {
+        btn.innerHTML = text;
+        document.getElementById('btn-submit-yes').disabled = false;
+        document.getElementById('btn-submit-no').disabled = false;
     }
 </script>
 
